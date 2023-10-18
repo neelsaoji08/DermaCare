@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RESULTS</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f7f7f7;
+        color: #333;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        flex-direction: column;
+        transition: background-color 0.3s, color 0.3s;
+      }
+
+      .translation {
+        background-color: #fee2e2;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        max-width: 600px;
+        width: 100%;
+        text-align: center;
+        animation: fadeIn 1s ease;
+      }
+
+      h1 {
+        color: #4a90e2;
+        margin-bottom: 10px;
+        font-size: 2em;
+      }
+
+      h2 {
+        margin-top: 20px;
+        font-size: 1.5em;
+      }
+
+      p {
+        margin-bottom: 20px;
+        font-size: 1em;
+        line-height: 1.6;
+      }
+
+      #ip,
+      #country,
+      #city,
+      #region,
+      #language {
+        margin-top: 20px;
+        font-size: 1em;
+      }
+
+      button {
+        background-color: #4a90e2;
+        color: #fff;
+        padding: 10px 20px;
+        font-size: 1em;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 20px;
+        transition: background-color 0.3s, color 0.3s;
+      }
+
+      button:hover {
+        background-color: #357abd;
+      }
+      /* Dark Mode */
+
+      body.dark-mode {
+        background-color: #333;
+        color: #fff;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="translation">
+      <h1>{{ desc_name }}</h1>
+
+      <h2>Basic Information</h2>
+      <p id="basic_info">{{ basic_info }}</p>
+
+      <h2>Common Name</h2>
+      <p id="common_name">{{ Common_name }}</p>
+
+      <h2>Treatment</h2>
+      <p id="treatment">{{ Treatment }}</p>
+
+      <h2>Symptoms</h2>
+      <p id="symptoms">{{ Symptoms }}</p>
+
+      <div id="ip"></div>
+      <div id="country"></div>
+      <div id="city"></div>
+      <div id="region"></div>
+      <div id="language"></div>
+
+      <button id="toggleDarkMode">Toggle Dark Mode</button>
+    </div>
+
+    <script>
+      const ipE1 = document.getElementById("ip");
+      const countryE1 = document.getElementById("country");
+      const cityE1 = document.getElementById("city");
+      const regionE1 = document.getElementById("region");
+      const languageE1 = document.getElementById("language");
+
+      fetch("http://ip-api.com/json/?fields=61439")
+        .then((res) => res.json())
+        .then((res) => {
+          ipE1.textContent = "IP Address: " + res.query;
+          countryE1.textContent = "Country: " + res.country;
+          cityE1.textContent = "City: " + res.city;
+          regionE1.textContent = "State: " + res.regionName;
+
+          const state = res.regionName;
+          const language = getRegionalLanguage(state);
+          languageE1.textContent = "Regional Language: " + language;
+
+          // Translate content after getting regional language
+          translateContent(language.toLowerCase());
+        })
+        .catch((error) => console.error("Error:", error));
+
+      function getRegionalLanguage(state) {
+        const stateLanguageMap = {
+          "Andhra Pradesh": "Telugu",
+          "Arunachal Pradesh": "English",
+          Assam: "Assamese",
+          Bihar: "Bhojpuri",
+          Chhattisgarh: "Hindi",
+          Goa: "Konkani",
+          Gujarat: "Gujarati",
+          Haryana: "Hindi",
+          "Himachal Pradesh": "Hindi",
+          Jharkhand: "Hindi",
+          Karnataka: "Kannada",
+          Kerala: "Malayalam",
+          "Madhya Pradesh": "Hindi",
+          Maharashtra: "Marathi",
+          Manipur: "Manipuri",
+          Meghalaya: "English",
+          Mizoram: "Mizo",
+          Nagaland: "English",
+          Odisha: "Odia",
+          Punjab: "Punjabi",
+          Rajasthan: "Hindi",
+          Sikkim: "Nepali",
+          "Tamil Nadu": "Tamil",
+          Telangana: "Telugu",
+          Tripura: "Bengali",
+          "Uttar Pradesh": "Hindi",
+          Uttarakhand: "Hindi",
+          "West Bengal": "Bengali",
+        };
+
+        return stateLanguageMap[state] || "Language not found for this state";
+      }
+
+      const darkModeButton = document.getElementById("toggleDarkMode");
+      let darkMode = false;
+
+      darkModeButton.addEventListener("click", () => {
+        darkMode = !darkMode;
+        document.body.classList.toggle("dark-mode", darkMode);
+        document.body.style.color = darkMode ? "#333" : "#333";
+      });
+    </script>
+  </body>
+</html>
