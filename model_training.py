@@ -1,7 +1,7 @@
 from keras.models import Sequential
 from keras.models import Model
 from keras.layers import Dense,Conv2D,Flatten,BatchNormalization,Dropout,MaxPooling2D,Input
-from keras.callbacks import ReduceLROnPlateau,EarlyStopping
+from keras.callbacks import ReduceLROnPlateau
 
     
 
