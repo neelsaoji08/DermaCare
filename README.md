@@ -15,7 +15,7 @@ This project aims to classify skin cancer images using machine learning techniqu
 
 3. **Organize the Dataset**:
    - Add all the images to a folder named `HAM10000_images_part_1`.
-   - Put this image folder along with all other project files in a folder called `dataset`.
+   - Put this image folder along with all other dataset files in a folder called `dataset`.
 
 4. **Run the Training Pipeline**:
    - Open and run `main_pipeline.ipynb` to train and save the model.
