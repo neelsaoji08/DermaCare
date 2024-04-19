@@ -5,7 +5,7 @@ from keras.callbacks import ReduceLROnPlateau
 
     
 
-def model_training_personal(X_train,X_test,y_train,y_test,size,
+def model_training_personal(X_train,X_valid,y_train,y_valid,size,
                             optimizer="Adam",loss="categorical_crossentropy",
                             metrics=['accuracy'],epochs=30,batch_size=128):
 
@@ -68,7 +68,7 @@ def model_training_personal(X_train,X_test,y_train,y_test,size,
     y_train,
     epochs=epochs,
     batch_size=batch_size,
-    validation_data=(X_test, y_test),
+    validation_data=(X_valid, y_valid),
     callbacks=[learning_rate_reduction]
     )
 
