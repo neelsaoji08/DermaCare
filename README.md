@@ -18,7 +18,7 @@ This project aims to classify skin cancer images using machine learning techniqu
    - Put this image folder along with all other dataset files in a folder called `dataset`.
 
 4. **Run the Training Pipeline**:
-   - Open and run `main_pipeline.ipynb` to train and save the model.
+   - Open and run `new_main_pipeline.ipynb` to train and save the model.
    - You can also adjust the size of the images used for training within this notebook.
 
 5. **Run the Front-end**:
